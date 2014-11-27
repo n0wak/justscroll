@@ -6,7 +6,6 @@
     <link href='http://fonts.googleapis.com/css?family=Comfortaa:400,700' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
-	
       html, body {
 		    background : #FFF;
 		    color : #000;
@@ -126,7 +125,7 @@
         <header>
           <h1><em>justScroll</em> is a simple dependency-free javascript library for scrolling the page to somewhere.</h1>
 
-          <div class="scroll-anchor"><a href="#sec2" class="link-to"><span class="fa fa-arrow-down"></span></a></div>
+          <div class="scroll-anchor"><a href="javascript:justScroll.to('sec2');" title="javascript:justScroll.to('sec2')"><span class="fa fa-arrow-down"></span></a></div>
         </header>   
 
       </section>
@@ -162,10 +161,10 @@
       <section id="sec6">
        <header>
          <h3><a href="https://github.com/n0wak/justscroll">justScroll <span class="fa fa-github-alt"></span></a> is on github and created by <a href="https://github.com/n0wak">n0wak <span class="fa fa-github-alt"></span></a>. Background pattern from <a href="http://thepatternlibrary.com/">The Pattern Library</a> and <a href="http://greweb.me/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/">Easing Functions sourced from greweb</a>.</h3>
-         <div class="scroll-anchor"><a href="#sec1" class="link-to"><span class="fa fa-arrow-up"></span></a></div>
+         <div class="scroll-anchor"><a href="javascript:justScroll.to('sec1');" title="javascript:justScroll.to('sec1')"><span class="fa fa-arrow-up"></span></a></div>
        </header>
       </section>
-      
+    </div>  
             
      <script type="text/javascript">
         
@@ -240,23 +239,7 @@
           }
 
       }());
-       
-       
-      window.onload = function() {
-        var scrollLink = document.getElementsByClassName("link-to");
-        
-        for (var i = 0; i < scrollLink.length; i++) {
-          scrollLink[i].addEventListener("click", function(e) {
-            e.preventDefault();
-            var id = (this.getAttribute("href").substring(1)) || false;
-            justScroll.to(id, 0.75);
-          });
-        }
-         
-         }
-        //justScroll.to("sec-pix");
-        
-        
+                   
         </script>
   </body>
 </html>
