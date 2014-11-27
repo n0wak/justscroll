@@ -20,11 +20,12 @@ var justScroll = (function() {
 
     var tweenPosition = 0;
     var tweenDuration = 60;
+    var tweenEasing = "easeInOutCubic";
 
     var tween = function() {
         var p = tweenPosition / tweenDuration;
         tweenPosition++;
-        return EasingFunctions.easeInOutCubic(p);
+        return EasingFunctions[tweenEasing](p);
     }
 
     var going = function() {
@@ -35,21 +36,29 @@ var justScroll = (function() {
         }
     }
 
-    var to = function(scrollTo, time) {
-        var toPos = 0;
+    var to = function(scrollTo, time, easing) {
         if (typeof scrollTo == "number") {
-            toPos = scrollTo;
+            tweenTo = scrollTo;
         } else if (typeof scrollTo == "string") {
-            toPos = (document.getElementById(scrollTo)).offsetTop;
+          var el = document.getElementById(scrollTo);
+          //if (el) {
+            tweenTo = (document.getElementById(scrollTo)).offsetTop;
+        } else {
+          tweenTo = 0;
         }
         if (typeof time == "number") {
             tweenDuration = Math.floor(time * 60);
         } else {
             tweenDuration = 60;
         }
+        if (typeof easing == "string" && typeof EasingFunctions[easing] == "function") {
+          tweenEasing = easing;
+        } else {
+          tweenEasing = "easeInOutCubic";
+        }
+        
 
         tweenPosition = 0;
-        tweenTo = toPos;
         tweenFrom = window.scrollY;
         window.requestAnimationFrame(going);
 
