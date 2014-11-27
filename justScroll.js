@@ -30,7 +30,7 @@ var justScroll = (function() {
 
     var going = function() {
         var p = tween();
-        window.scroll(0, tweenFrom + (tweenTo - tweenFrom) * p)
+        window.scroll(0, tweenFrom + (tweenTo - tweenFrom) * p);
         if (p != 1) {
             requestAnimationFrame(going);
         }
@@ -66,9 +66,14 @@ var justScroll = (function() {
   
 
         tweenPosition = 0;
-        tweenFrom = getScrollY()
-        going();
-
+        tweenFrom = getScrollY();
+        
+        if (typeof requestAnimationFrame == "undefined") {
+          window.scroll(0, tweenTo);
+        } else {
+        
+          going();
+        }
     }
 
     return {
