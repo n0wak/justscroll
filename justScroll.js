@@ -67,7 +67,7 @@ var justScroll = (function() {
 
         tweenPosition = 0;
         tweenFrom = getScrollY()
-        going());
+        going();
 
     }
 
