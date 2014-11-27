@@ -30,10 +30,17 @@ var justScroll = (function() {
 
     var going = function() {
         var p = tween();
-        window.scroll(0, tweenFrom + (tweenTo - tweenFrom) * p)
+        window.scroll(0, tweenFrom + (tweenTo - tweenFrom) * p);
         if (p != 1) {
-            window.requestAnimationFrame(going);
+            requestAnimationFrame(going);
         }
+    }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
+    var getScrollY = function() {
+        var supportPageOffset = window.pageXOffset !== undefined;
+        var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+        return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
     }
 
     var to = function(scrollTo, time, easing) {
@@ -56,12 +63,17 @@ var justScroll = (function() {
         } else {
           tweenEasing = "easeInOutCubic";
         }
-        
+  
 
         tweenPosition = 0;
-        tweenFrom = window.scrollY;
-        window.requestAnimationFrame(going);
-
+        tweenFrom = getScrollY();
+        
+        if (typeof requestAnimationFrame == "undefined") {
+          window.scroll(0, tweenTo);
+        } else {
+        
+          going();
+        }
     }
 
     return {
