@@ -32,10 +32,10 @@ var justScroll = (function() {
         var p = tween();
         window.scroll(0, tweenFrom + (tweenTo - tweenFrom) * p)
         if (p != 1) {
-            window.requestAnimationFrame(going);
+            requestAnimationFrame(going);
         }
     }
-    
+
     // https://developer.mozilla.org/en-US/docs/Web/API/window.scrollY
     var getScrollY = function() {
         var supportPageOffset = window.pageXOffset !== undefined;
@@ -63,11 +63,11 @@ var justScroll = (function() {
         } else {
           tweenEasing = "easeInOutCubic";
         }
-        
+  
 
         tweenPosition = 0;
         tweenFrom = getScrollY()
-        window.requestAnimationFrame(going);
+        going());
 
     }
 
